@@ -1,0 +1,25 @@
+sequenceDiagram
+    participant WD as Workflow Developer
+    participant WE as Workflow Engine
+    participant RM as Recipe Manager
+    participant AP as Akamai Platform
+    participant GL as Global Library
+    participant EU as End Users
+    
+    WD->>WE: Create Workflow
+    WE->>WE: Validate Configuration
+    WD->>WE: Export Workflow
+    WE-->>WD: Workflow File (JSON/XML)
+    
+    WD->>RM: Import Workflow
+    RM->>RM: Convert to Recipe
+    RM-->>WD: Recipe Created
+    
+    WD->>AP: Login to Akamai
+    AP-->>WD: Authentication Success
+    WD->>AP: Navigate to Library/Recipe
+    WD->>AP: Search Recipe
+    AP-->>WD: Recipe Found
+    WD->>AP: Publish Recipe
+    AP->>GL: Update Global Library
+    GL-->>EU: Recipe Available

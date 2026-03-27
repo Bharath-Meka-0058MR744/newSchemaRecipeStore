@@ -1,0 +1,13 @@
+graph LR
+    A[Workflow Engine] -->|Export| B[File System]
+    B -->|Import| C[Recipe Manager]
+    C -->|Store| D[Local Repository]
+    D -->|Sync| E[Akamai Platform]
+    E -->|Publish| F[Global Library]
+    F -->|Access| G[End Users]
+    
+    style A fill:#e3f2fd
+    style C fill:#fff4e6
+    style E fill:#f3e5f5
+    style F fill:#c8e6c9
+    style G fill:#ffe0b2

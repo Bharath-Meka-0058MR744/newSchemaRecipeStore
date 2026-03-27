@@ -1,0 +1,35 @@
+flowchart TB
+    Start([DevOps Team Initiates<br/>One-Click Script]) --> StageCheck{Identify<br/>Target Stage}
+    
+    StageCheck -->|DEV| DevRepo[(Seed Data Repo<br/>DEV)]
+    StageCheck -->|UAT| UatRepo[(Seed Data Repo<br/>UAT)]
+    StageCheck -->|PROD| ProdRepo[(Seed Data Repo<br/>PROD)]
+    
+    DevRepo --> Fetch[Fetch Recipe Collections]
+    UatRepo --> Fetch
+    ProdRepo --> Fetch
+    
+    Fetch --> Validate{Validate<br/>Recipes}
+    
+    Validate -->|Invalid| Error[Log Error & Notify]
+    Error --> End([Deployment Failed])
+    
+    Validate -->|Valid| Transform[Transform to<br/>Tenant Format]
+    
+    Transform --> Upload[Upload to<br/>Target Tenant]
+    
+    Upload --> Verify{Verify<br/>Upload}
+    
+    Verify -->|Failure| Rollback[Rollback & Notify]
+    Rollback --> End
+    
+    Verify -->|Success| Success([Deployment Successful])
+    
+    style Start fill:#90EE90
+    style Success fill:#90EE90
+    style End fill:#FFB6C1
+    style DevRepo fill:#87CEEB
+    style UatRepo fill:#87CEEB
+    style ProdRepo fill:#87CEEB
+    style Error fill:#FFB6C1
+    style Rollback fill:#FFB6C1

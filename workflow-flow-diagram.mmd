@@ -1,0 +1,65 @@
+flowchart TD
+    Start([Start: Workflow Publishing Process]) --> Step1[Create Workflow]
+    
+    Step1 --> Step2[Export Workflow]
+    Step2 --> Step2a{Export Format}
+    Step2a -->|JSON/XML| Step3[Navigate to Recipes Tab]
+    
+    Step3 --> Step4[Import Workflow]
+    Step4 --> Step4a[Select Exported File]
+    Step4a --> Step4b[Validate Import]
+    Step4b --> Step4c{Import Successful?}
+    
+    Step4c -->|No| Error1[Review Error Logs]
+    Error1 --> Step4a
+    Step4c -->|Yes| Step5[Recipe Created Locally]
+    
+    Step5 --> Divider1[/Global Publishing Process/]
+    
+    Divider1 --> Step6[Login to Akamai Platform]
+    Step6 --> Step6a[Authenticate Credentials]
+    Step6a --> Step6b{Authentication Success?}
+    Step6b -->|No| Error2[Check Credentials]
+    Error2 --> Step6
+    Step6b -->|Yes| Step7[Access Admin Panel]
+    
+    Step7 --> Step8[Navigate to Library]
+    Step8 --> Step9[Select Recipe Section]
+    
+    Step9 --> Step10[Search for Recipe]
+    Step10 --> Step10a[Enter Recipe Name/ID]
+    Step10a --> Step10b{Recipe Found?}
+    Step10b -->|No| Error3[Verify Recipe Name]
+    Error3 --> Step10
+    Step10b -->|Yes| Step11[Open Recipe Details]
+    
+    Step11 --> Step12[Change Status to Published]
+    Step12 --> Step12a[Review Recipe Metadata]
+    Step12a --> Step12b[Confirm Publishing]
+    Step12b --> Step12c{Validation Passed?}
+    
+    Step12c -->|No| Error4[Fix Validation Issues]
+    Error4 --> Step12a
+    Step12c -->|Yes| Step13[Recipe Published Globally]
+    
+    Step13 --> End([End: Recipe Available Globally])
+    
+    style Start fill:#e1f5e1
+    style End fill:#e1f5e1
+    style Step1 fill:#fff4e6
+    style Step2 fill:#fff4e6
+    style Step4 fill:#fff4e6
+    style Step5 fill:#e3f2fd
+    style Step6 fill:#f3e5f5
+    style Step7 fill:#f3e5f5
+    style Step8 fill:#f3e5f5
+    style Step9 fill:#f3e5f5
+    style Step10 fill:#f3e5f5
+    style Step11 fill:#f3e5f5
+    style Step12 fill:#fff3e0
+    style Step13 fill:#c8e6c9
+    style Error1 fill:#ffcdd2
+    style Error2 fill:#ffcdd2
+    style Error3 fill:#ffcdd2
+    style Error4 fill:#ffcdd2
+    style Divider1 fill:#e0e0e0
